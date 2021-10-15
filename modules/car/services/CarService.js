@@ -170,7 +170,9 @@ const carbook = asyncHandler(async (req) => {
         dropoff_location: req.body.dropoff_location ? req.body.dropoff_location : '',
 
         car_details: JSON.stringify(carDetails),
-        user_details: JSON.stringify(userDetails)
+        user_details: JSON.stringify(userDetails),
+
+        created_by: req.usertoken.userId,
 
 
     };
