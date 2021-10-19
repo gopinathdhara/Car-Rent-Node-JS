@@ -11,8 +11,15 @@ router.post('/addcar',
 );
 //#######################
 
+//###########car update#########
+router.put('/updatecar',
+  middleware.verifyToken,
+  carController.updatecar
+);
+//#######################
+
 //###########car list for all#########
-router.get('/listcar',
+router.post('/listcar',
   carController.listcar
 );
 //#####################
@@ -30,5 +37,18 @@ router.post('/carbook',
 );
 //#######################
 
+//###########book list#########
+router.post('/carbooklist',
+  middleware.verifyTokenUserAdmin,
+  carController.carbooklist
+);
+//#######################
+
+//###########update Booking Status#########
+router.post('/updateBookingStatus',
+  middleware.verifyTokenUser,
+  carController.updateBookingStatus
+);
+//#######################
 
 module.exports = router;

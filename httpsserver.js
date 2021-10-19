@@ -4,7 +4,8 @@ dotenv.config();
 const app = express();
 var cors = require('cors')
 const bodyParser = require('body-parser');
-const port = 3000; 
+
+const port = 3000;
 const router = require('./modules/routes');
 var fs = require('fs');
 var privateKey = fs.readFileSync('private.key', 'utf8');
@@ -31,7 +32,9 @@ var upload = multer({ storage: storage });
 app.use(cors());
 app.use(express.static('public'));
 app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.json({ limit: process.env.REQUEST_LIMIT || '100kb' }));
+//app.use(bodyParser.json({ limit: process.env.REQUEST_LIMIT || '100kb' }));
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 //for multiple file upload
 app.post('/mediafiles', upload.array('uploaded_file'), function (req, res, next) {

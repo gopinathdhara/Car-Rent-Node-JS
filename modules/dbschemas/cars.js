@@ -70,6 +70,7 @@ const cars = sequelize.define('cars', {
         type: Sequelize.STRING,
         field: "brand_name"
     },
+
     created_by: {
         type: Sequelize.INTEGER,
         field: "created_by"

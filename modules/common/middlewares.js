@@ -15,35 +15,59 @@ const sendErrorResponse = (res, lang, enmsg, armsg) => {
 const verifyToken = async (req, res, next) => {
     //console.log('req.headers');
     //console.log(req.headers);
+    var userFlag = true;
     try {
         var decoded = await jwt.verify(req.headers.token, 'secret');
         req.usertoken = decoded;
         console.log(req.usertoken);
     } catch (err) {
-        res.status(400).json({ "status": 400, 'message': 'Token is missing or expired' });
+        userFlag = false;
+        res.status(400).send({ "status": 400, 'message': 'Token is missing or expired' });
     }
     if (req.usertoken.userType != 2) {
-        res.status(400).json({ "status": 400, 'message': 'You are not authorized to access this module' });
+        res.status(400).send({ "status": 400, 'message': 'You are not authorized to add car' });
     }
-    next();
-
+    if (req.usertoken.userType == 2 && userFlag) {
+        next();
+    }
 }
 //token verification for user
 const verifyTokenUser = async (req, res, next) => {
     //console.log('req.headers');
     //console.log(req.headers);
+    var userFlag = true;
     try {
         var decoded = await jwt.verify(req.headers.token, 'secret');
         req.usertoken = decoded;
         //console.log(req.usertoken);
     } catch (err) {
-        res.status(400).json({ "status": 400, 'message': 'Token is missing or expired' });
+        userFlag = false;
+        res.status(400).send({ "status": 400, 'message': 'Token is missing or expired' });
     }
     if (req.usertoken.userType != 1) {
-        res.status(400).json({ "status": 400, 'message': 'You are not authorized to book the car' });
+        res.status(400).send({ "status": 400, 'message': 'You are not authorized to book the car' });
     }
-    next();
+    if (req.usertoken.userType == 1 && userFlag) {
+        next();
+    }
+}
 
+//token verification for admin and user
+const verifyTokenUserAdmin = async (req, res, next) => {
+    //console.log('req.headers');
+    //console.log(req.headers);
+    var userFlag = true;
+    try {
+        var decoded = await jwt.verify(req.headers.token, 'secret');
+        req.usertoken = decoded;
+        //console.log(req.usertoken);
+    } catch (err) {
+        userFlag = false;
+        res.status(400).send({ "status": 400, 'message': 'Token is missing or expired' });
+    }
+    if (userFlag) {
+        next();
+    }
 }
 
 const verifyAccess = (req, res, next) => {
@@ -57,5 +81,6 @@ module.exports = {
     verifyToken,
     verifyAccess,
     verifyIsPartner,
-    verifyTokenUser
+    verifyTokenUser,
+    verifyTokenUserAdmin
 };

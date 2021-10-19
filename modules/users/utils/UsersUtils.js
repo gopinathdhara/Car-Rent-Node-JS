@@ -85,10 +85,7 @@ const validateReviewsListBody = function (b) {
 //####################################
 //##########format listing###########
 const formatServiceDataForUI = (eachService) => {
-    var obj = eachService;
-    obj.car_details = obj.car_details ? JSON.parse(obj.car_details) : '';
-    obj.user_details = obj.user_details ? JSON.parse(obj.user_details) : '';
-    return obj;
+    return eachService;
 }
 //############################
 

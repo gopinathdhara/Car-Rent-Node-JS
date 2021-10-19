@@ -28,7 +28,9 @@ var upload = multer({ storage: storage });
 
 app.use(express.static('public'));
 app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.json({ limit: process.env.REQUEST_LIMIT || '100kb' }));
+//app.use(bodyParser.json({ limit: process.env.REQUEST_LIMIT || '100kb' }));
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(cors());
 
 //for multiple file upload
