@@ -12,7 +12,7 @@ const usersRoutes = require('./users/UsersRoutes');
 router.get('/', (req, res) => {
     return res.status(200).send({
         statusCode: 200,
-        message: 'Api working fine',
+        message: 'Api working fine car rental',
         data: {}
     });
 });
