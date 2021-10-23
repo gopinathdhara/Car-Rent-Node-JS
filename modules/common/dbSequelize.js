@@ -1,9 +1,18 @@
 var Sequelize = require('sequelize');
 const dotenv = require('dotenv');
 dotenv.config();
-let host = '127.0.0.1';
-let user = 'root';
-let password = '';
+// let host = '127.0.0.1';
+// let user = 'root';
+// let password = '';
+// let database = 'car_rent_db';
+// var sequelize = new Sequelize(database, user, password, {
+//     host: host,
+//     port: '3306',
+//     dialect: 'mysql'
+// });
+let host = 'localhost';
+let user = 'phpmyadmin';
+let password = 'Gopi@123456';
 let database = 'car_rent_db';
 var sequelize = new Sequelize(database, user, password, {
     host: host,
