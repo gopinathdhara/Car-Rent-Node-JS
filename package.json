@@ -1,14 +1,14 @@
 {
-  "name": "bs-api",
+  "name": "Car Rent",
   "version": "1.0.0",
-  "description": "Apis for buttlerstop",
+  "description": "Apis for Car Rent",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
     "deploy": "sh deploy.sh"
   },
-  "author": "XCIT DEV",
+  "author": "Gopinath Dhara",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
