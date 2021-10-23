@@ -15,6 +15,18 @@ const insertUser = asyncHandler(async (req) => {
         throw Error(statusObj.msg);
     }
     //##################################
+
+    //check email exist
+    try {
+        var chkEmailFlag = await registrationModel.checkEmailExist({ email: req.body.email });
+    } catch (error) {
+        console.log(error);
+        throw Error("Error occurred to check email exist");
+    }
+    if (chkEmailFlag == false) {
+        throw Error("Error occurred to register. Email already exist");
+    }
+
     const saltRounds = 10;
     const salt = bcrypt.genSaltSync(saltRounds);
     const hashPassword = bcrypt.hashSync(req.body.password, salt);
