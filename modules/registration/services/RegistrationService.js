@@ -24,7 +24,7 @@ const insertUser = asyncHandler(async (req) => {
         throw Error("Error occurred to check email exist");
     }
     if (chkEmailFlag == false) {
-        throw Error("Error occurred to register. Email already exist.");
+        throw Error("Error occurred to register. Email already exist!");
     }
 
     const saltRounds = 10;
