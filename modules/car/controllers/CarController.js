@@ -48,6 +48,29 @@ const updatecar = async (req, res, next) => {
 };
 //##################
 
+//delete car
+const deletecar = async (req, res, next) => {
+    try {
+        const data = await carService.deletecar(req);
+        return res.status(200).send({
+            statusCode: 200,
+            message: 'Car deleted successfully !!!',
+            data: data
+        });
+    } catch (err) {
+        console.log(err);
+        return res.status(400).send({
+            statusCode: 400,
+            message: 'Sorry, we are having some issues, failed to delete car !!!',
+            error: ((err) => {
+                return err.message
+            })(err),
+            data: {}
+        });
+    }
+};
+//##################
+
 
 //###########car list for all#########
 const listcar = async (req, res, next) => {
@@ -175,5 +198,6 @@ module.exports = {
     carbook,
     carbooklist,
     updatecar,
-    updateBookingStatus
+    updateBookingStatus,
+    deletecar
 }

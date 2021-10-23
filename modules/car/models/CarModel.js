@@ -83,8 +83,13 @@ const listcar = async (cond, page, searchData) => {
 
     var sortby = 'updated_at';
     var whereData = {
+        display_status: 1
     }
     var sortdirection = 'desc';
+
+    if (searchData != undefined) {
+        whereData.city_name = searchData.city
+    }
 
     if (cond.id != undefined) {
         //whereData.id = cond.id
@@ -105,7 +110,7 @@ const listcar = async (cond, page, searchData) => {
         var carResult;
         if (page == 'home') {
             carResult = await cars.findAll({
-                //where: whereData,
+                where: { display_status: 1 },
                 // include: [{
                 //     model: users
                 // }],
@@ -303,6 +308,15 @@ const carbooklist = async (cond) => {
 }
 //#################################
 
+//delete car
+const deletecar = async (updateData, cond) => {
+    return await db('cars')
+        .where(cond)
+        .update(
+            updateData
+        );
+}
+
 module.exports = {
     addcar,
     listcar,
@@ -313,5 +327,6 @@ module.exports = {
     carbooklist,
     checkCarBook,
     updatecar,
-    updateBookingStatus
+    updateBookingStatus,
+    deletecar
 }

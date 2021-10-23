@@ -18,6 +18,13 @@ router.put('/updatecar',
 );
 //#######################
 
+//delete car
+router.post('/deletecar',
+  middleware.verifyToken,
+  carController.deletecar
+);
+//#######################
+
 //###########car list for all#########
 router.post('/listcar',
   carController.listcar

@@ -43,6 +43,51 @@ const listuser = async () => {
 }
 //#################################
 
+//profile details
+const userProfile = async (cond) => {
+
+
+    //###########################
+    var countObj = await users.count({
+        where: cond,
+        distinct: true,
+        // order: [
+        //     [sortby, sortdirection],
+        // ],
+    });
+    if (countObj > 0) {
+
+        return await users.findAll({
+            where: cond,
+            // include: [{
+            //     model: users
+            // }],
+            // order: [
+            //     [sortby, sortdirection],
+            // ],
+        });
+
+    } else {
+        return new Promise(function (resolve, reject) {
+            resolve([]);
+        });
+    }
+}
+//#################################
+
+//update profile
+const updateprofile = async (updateData, cond) => {
+    return await db('users')
+        .where(cond)
+        .update(
+            updateData
+        );
+}
+//#################
+
+
 module.exports = {
-    listuser
+    listuser,
+    userProfile,
+    updateprofile
 }

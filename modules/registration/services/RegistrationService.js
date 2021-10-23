@@ -26,6 +26,7 @@ const insertUser = asyncHandler(async (req) => {
         phone: req.body.phone ? req.body.phone : '',
         address: req.body.address ? req.body.address : '',
         password: req.body.password ? hashPassword : '',
+        gender: req.body.gender ? req.body.gender : '',
         //created_updated_by: req.loggedInUser.toJSON().id,
     };
 

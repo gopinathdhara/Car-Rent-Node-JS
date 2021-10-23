@@ -337,6 +337,24 @@ const updateBookingStatus = asyncHandler(async (req) => {
     }
 });
 
+//delete car
+const deletecar = asyncHandler(async (req) => {
+
+    var data = {
+        display_status: 0
+    }
+    var cond = {
+        id: req.body.carId
+    }
+    try {
+        return await carModel.deletecar(data, cond);
+
+    } catch (error) {
+        console.log(error);
+        throw Error("Error occurred to update booking status");
+    }
+});
+
 
 module.exports = {
     addcar,
@@ -345,5 +363,6 @@ module.exports = {
     carbook,
     carbooklist,
     updatecar,
-    updateBookingStatus
+    updateBookingStatus,
+    deletecar
 }

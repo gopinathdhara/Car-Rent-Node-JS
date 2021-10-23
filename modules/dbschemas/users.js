@@ -5,6 +5,10 @@ const Op = Sequelize.Op;
 //########### sequelize model schema############
 
 const users = sequelize.define('users', {
+    gender: {
+        type: Sequelize.STRING,
+        field: "gender"
+    },
     name: {
         type: Sequelize.STRING,
         field: "name"
