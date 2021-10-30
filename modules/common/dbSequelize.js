@@ -13,7 +13,7 @@ dotenv.config();
 //     dialect: 'mysql'
 // });
 
-//for aws server set up
+//for aws server set up 
 let host = 'localhost';
 let user = 'phpmyadmin';
 let password = 'Gopi@123456';

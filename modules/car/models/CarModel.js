@@ -23,14 +23,7 @@ const updatecar = async (updateData, cond) => {
             updateData
         );
 }
-//update Booking Status
-const updateBookingStatus = async (updateData, cond) => {
-    return await db('booking_details')
-        .where(cond)
-        .update(
-            updateData
-        );
-}
+
 
 //###########car book#########
 const carbook = async (insertData) => {
@@ -263,6 +256,63 @@ const getCarDetails = async (cond) => {
 }
 //#####################
 
+//update Booking Status
+const updateBookingStatus = async (updateData, cond) => {
+
+    console.log(updateData)
+    //completed
+    if (updateData.booking_status == 1) {
+        var count = await db
+            .count('id as cnt')
+            .from("booking_details").where(cond).where('start_date_time', '<', db.fn.now());
+        var countRecord = count[0].cnt;
+        //console.log('countRecord')
+        //console.log(count)
+        if (countRecord == 0) {
+            return 2;
+        } else {
+            return await db('booking_details')
+                .where(cond)
+                .update(
+                    updateData
+                );
+        }
+    }
+    //cancelled
+    else if (updateData.booking_status == 2) {
+        var count = await db
+            .count('id as cnt')
+            .from("booking_details").where(cond).where('start_date_time', '>', db.fn.now());
+        var countRecord = count[0].cnt;
+        //console.log('countRecord')
+        //console.log(count)
+        if (countRecord == 0) {
+            return 3;
+        } else {
+            return await db('booking_details')
+                .where(cond)
+                .update(
+                    updateData
+                );
+        }
+    }
+    //pending
+    else {
+        return await db('booking_details')
+            .where(cond)
+            .update(
+                updateData
+            );
+    }
+
+    //print sql
+    // var count = await db
+    //     .count('id as cnt')
+    //     .from("booking_details").where(cond).where('start_date_time', '<', db.fn.now()).toSQL().toNative();
+    //console.log(bookingDetails[0].start_date_time)
+
+}
+
 //get user details
 const getUserDetails = async (cond) => {
     return await db
@@ -275,7 +325,7 @@ const getUserDetails = async (cond) => {
 //###########cars booking list #########
 const carbooklist = async (cond) => {
 
-    var sortby = 'updated_at';
+    var sortby = 'created_at';
     var sortdirection = 'desc';
     //###########################
     var countObj = await booking_details.count({

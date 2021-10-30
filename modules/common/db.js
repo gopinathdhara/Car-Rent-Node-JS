@@ -11,7 +11,7 @@ const knex = require('knex')({
     //     database: 'car_rent_db'
     // },
 
-    //for aws server set up
+    //for aws server set up 
     connection: {
         host: 'localhost',
         user: 'phpmyadmin',

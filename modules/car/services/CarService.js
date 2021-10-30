@@ -329,11 +329,17 @@ const updateBookingStatus = asyncHandler(async (req) => {
         id: req.body.carId
     }
     try {
-        return await carModel.updateBookingStatus(data, cond);
+        var status = await carModel.updateBookingStatus(data, cond);
 
     } catch (error) {
         console.log(error);
         throw Error("Error occurred to update booking status");
+    }
+    if (status == 2) {
+        throw Error("You can not complete the booking now.");
+    }
+    if (status == 3) {
+        throw Error("You can not cancel the booking now.");
     }
 });
 
